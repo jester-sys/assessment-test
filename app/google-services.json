@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "149416304363",
+    "project_id": "assessment-test-74157",
+    "storage_bucket": "assessment-test-74157.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:149416304363:android:f56aae064b2d002d7728ae",
+        "android_client_info": {
+          "package_name": "com.krishna.assessmenttest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "149416304363-1fcifbpmd392qk29apqeqd1nu1ctjki8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0mWaugVs0MXFPSZxF_cvvzAW5uryLs5U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "149416304363-1fcifbpmd392qk29apqeqd1nu1ctjki8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
