@@ -10,7 +10,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.krishna.assessmenttest.Firebase.FirebaseActivity
 import com.krishna.assessmenttest.Firebase.FirebaseHelper
+import com.krishna.assessmenttest.Room.DataBase
+import com.krishna.assessmenttest.Room.Model
+import com.krishna.assessmenttest.Room.RoomActivity
 import com.krishna.assessmenttest.databinding.ActivityMainBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 
@@ -18,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private var profilePhotoUri: Uri? = null
     private lateinit var database: FirebaseDatabase
+    private lateinit var localDatabase: DataBase
     private var storage: FirebaseStorage? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         database = FirebaseDatabase.getInstance()
         storage = FirebaseStorage.getInstance()
+
+        localDatabase = DataBase.getInstance(this)
 
         binding.btnSave.setOnClickListener {
             saveUserData()
@@ -37,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnSharedPreferences.setOnClickListener {
             startActivity(Intent(this, SharedPreferencesActivity::class.java))
+        }
+        binding.Roomsave.setOnClickListener {
+            startActivity(Intent(this, RoomActivity::class.java))
         }
 
         binding.btnFirebase.setOnClickListener {
@@ -56,9 +68,22 @@ class MainActivity : AppCompatActivity() {
         val email = binding.etEmail.text.toString()
         val dob = binding.etDateOfBirth.text.toString()
 
+        val user = Model(
+            name = name,
+            phoneNumber = phoneNumber,
+            email = email,
+            dob = dob,
+            photoProfile = profilePhotoUri
+        )
+
+        CoroutineScope(Dispatchers.IO).launch {
+            localDatabase.dataDao().insertData(user)
+        }
+
+
         // Save data in SharedPreferences
         val sharedPrefsHelper = SharedPrefsHelper(this)
-        sharedPrefsHelper.saveUserData(name, phoneNumber, email, profilePhotoUri, dob)
+        sharedPrefsHelper.saveUserData(SharedUserData(name, phoneNumber, email, dob, profilePhotoUri))
 
 
         // Save data in Firebase
@@ -113,4 +138,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    }
+}

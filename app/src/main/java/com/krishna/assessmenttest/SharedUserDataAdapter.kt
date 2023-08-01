@@ -1,7 +1,6 @@
 package com.krishna.assessmenttest
 
 import android.content.Context
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.krishna.assessmenttest.databinding.ItemUserDataBinding
 import com.squareup.picasso.Picasso
 
-class SharedUserDataAdapter(private val context: Context) : RecyclerView.Adapter<SharedUserDataAdapter.UserDataViewHolder>() {
+class SharedUserDataAdapter(private val context: Context ) : RecyclerView.Adapter<SharedUserDataAdapter.UserDataViewHolder>() {
 
     private val userDataList = mutableListOf<SharedUserData>()
 
@@ -108,15 +107,8 @@ class SharedUserDataAdapter(private val context: Context) : RecyclerView.Adapter
                     // Update the data in the adapter and notify the RecyclerView
                     updateUserData(position, editedUserData)
                     // Save the edited data to SharedPreferences using the SharedPrefsHelper
-                    val prefsHelper = SharedPrefsHelper(context)
-                    prefsHelper.saveUserData(
-                        editedName,
-                        editedPhoneNumber,
-                        editedEmail,
-                        userData.photoProfile,
-                        userData.dob
-                    )
-
+//                    val prefsHelper = SharedPrefsHelper(context)
+//                    prefsHelper.saveUserData(SharedUserData(name, phoneNumber, email, dob, profilePhotoUri))
                     Toast.makeText(context, "Data updated successfully", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                 }
@@ -152,4 +144,3 @@ class SharedUserDataAdapter(private val context: Context) : RecyclerView.Adapter
         alertDialog.show()
     }
 }
-
